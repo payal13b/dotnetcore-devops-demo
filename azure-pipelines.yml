@@ -13,5 +13,11 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- script: dotnet build --configuration $(buildConfiguration)
+- script: dotnet build --configuration $(buildConfiguration)  
+- task: AzureWebApp@1
+  inputs:
+    azureSubscription: 'Terraform'
+    appType: 'webAppLinux'
+    appName: 'mysampledemo123'
+    package: '$(System.DefaultWorkingDirectory)/**/*.zip'
   displayName: 'dotnet build $(buildConfiguration)'
